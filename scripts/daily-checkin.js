@@ -1,5 +1,5 @@
-const axios = require("axios");
-const CryptoJS = require("crypto-js");
+import axios from "axios";
+import CryptoJS from "crypto-js";
 
 const JM_VERSION = "2.0.13";
 const JM_SECRET = "185Hcomic3PAPP7R";
