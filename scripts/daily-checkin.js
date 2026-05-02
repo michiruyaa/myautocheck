@@ -226,11 +226,18 @@ async function login(baseUrl, account, password) {
     },
   });
 
-  const jwtToken = String(result?.jwttoken || "").trim();
-  const uid = String(result?.uid || "").trim();
+  console.log("[jm] 登录响应:", JSON.stringify(result, null, 2));
+
+  // 处理两种响应结构:
+  // 1. 明文: {code: 200, data: {jwttoken: "xxx", uid: "xxx"}}
+  // 2. 解密后: {jwttoken: "xxx", uid: "xxx"}
+  const dataObj = result?.data && typeof result.data === "object" ? result.data : result;
+  const jwtToken = String(dataObj?.jwttoken || "").trim();
+  const uid = String(dataObj?.uid || "").trim();
 
   if (!jwtToken) {
-    throw new Error("登录失败: 未获取到 jwtToken");
+    const errorMsg = result?.errorMsg || result?.msg || "未获取到 jwtToken";
+    throw new Error(`登录失败: ${errorMsg}`);
   }
 
   console.log(`[jm] 登录成功, uid=${uid}`);
