@@ -141,6 +141,9 @@ async function decodeResponse(raw, ts) {
   let text = "";
   if (raw instanceof ArrayBuffer) {
     text = new TextDecoder("utf-8").decode(new Uint8Array(raw));
+  } else if (raw && typeof raw === "object" && Buffer.isBuffer(raw)) {
+    // Node.js Buffer (axios 在 Node 环境下返回的是 Buffer 而不是 ArrayBuffer)
+    text = raw.toString("utf-8");
   } else if (typeof raw === "string") {
     text = raw;
   } else {
