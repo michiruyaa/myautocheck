@@ -2,7 +2,6 @@ name: 禁漫天堂每日自动签到
 
 on:
   schedule:
-    # 北京时间每天 7:00 = UTC 23:00 (前一天)
     - cron: '0 23 * * *'
   workflow_dispatch:
 
