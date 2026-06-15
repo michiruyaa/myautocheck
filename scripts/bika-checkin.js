@@ -128,6 +128,31 @@ async function login(account, password) {
   return token;
 }
 
+async function getUserProfile(token) {
+  const data = await tryWithFallback((apiBase) =>
+    bikaRequest({
+      apiBase,
+      method: "GET",
+      url: "users/profile",
+      authorization: token,
+    })
+  );
+
+  const user = data?.data?.user ?? {};
+  const name = String(user?.name ?? "");
+  const level = Number(user?.level ?? 0);
+  const exp = Number(user?.exp ?? 0);
+  const title = String(user?.title ?? "");
+
+  if (name) {
+    console.log(`[bika] 用户: ${name}`);
+  }
+  console.log(`[bika] 等级: Lv.${level}${title ? ` (${title})` : ""}`);
+  console.log(`[bika] 当前经验值: ${exp}`);
+
+  return { name, level, exp, title };
+}
+
 async function checkin(token) {
   console.log("[bika] 正在签到...");
   const data = await tryWithFallback((apiBase) =>
@@ -166,6 +191,7 @@ async function main() {
 
   try {
     const token = await login(account, password);
+    await getUserProfile(token);
     await checkin(token);
     console.log("[bika] 每日签到任务完成");
   } catch (error) {
