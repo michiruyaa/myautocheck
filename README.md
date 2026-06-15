@@ -5,8 +5,8 @@
 ## 相关链接
 
 - Breeze 漫画阅读器: https://github.com/deretame/Breeze
-- Breeze-plugin-JmComic(https://github.com/deretame/Breeze-plugin-JmComic) 
-- Breeze-plugin-bikaComic(https://github.com/deretame/Breeze-plugin-bikaComic) 
+- [Breeze-plugin-JmComic](https://github.com/deretame/Breeze-plugin-JmComic) 
+- [Breeze-plugin-bikaComic](https://github.com/deretame/Breeze-plugin-bikaComic) 
 
 ## 自动签到配置
 
